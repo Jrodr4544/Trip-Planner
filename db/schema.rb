@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704150521) do
+ActiveRecord::Schema.define(version: 20160705011908) do
 
   create_table "objectives", force: :cascade do |t|
     t.string  "title"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160704150521) do
   create_table "trips", force: :cascade do |t|
     t.string  "title"
     t.integer "user_id"
+    t.text    "description"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
