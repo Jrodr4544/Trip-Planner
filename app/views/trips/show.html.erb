@@ -1,0 +1,21 @@
+<h1><%= @trip.title %></h1>
+
+<% if @trip.objectives.blank? %>
+  <li><%= link_to "Create New Objective", new_objective_path %></li>
+<% end %>  
+  <ul>
+  <% @trip.objectives.each do |objective| %>
+
+    <li><%= objective.city    %></li>
+    <li><%= objective.state   %></li>
+    <li><%= objective.country %></li>
+    <li><%= objective.notes   %></li>
+    <li><%= link_to "Edit this objective", edit_objective_path(objective) %></li>
+    <br>
+  <% end %>
+  </ul>
+
+<%= link_to "Create a new trip", new_trip_path %> | <%= link_to "Modify trip", edit_trip_path(@trip) %>
+
+
+

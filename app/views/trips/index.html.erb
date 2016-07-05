@@ -1,0 +1,17 @@
+<%= render template: 'welcome/home'%>
+<div class="well">
+    <div class="col-lg-6">
+  <% if current_user %>
+    <% current_user.trips.each do |trip| %>
+      <h4><%= link_to trip.title, trip_path(trip) %></h4>
+      <p><%= trip.description %></p>
+    <% end %>
+  <% else %>
+    <% Trip.all.each do |trip| %>
+      <h4><%= trip.title %></h4>
+      <p><%= trip.description %></p>
+      <!-- maybe add trip description -->
+    <% end %>
+  <% end %>
+  </div>
+</div>
