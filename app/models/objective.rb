@@ -4,6 +4,11 @@ class Objective < ActiveRecord::Base
   acts_as_mappable
   before_validation :geocode_location, :on => :create
 
+# All classes are called using the following signature:
+
+# include Geokit::Geocoders
+# location = XxxGeocoder.geocode(address)
+
   private
 
     def geocode_location
