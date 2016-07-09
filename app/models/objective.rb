@@ -1,9 +1,11 @@
 
 class Objective < ActiveRecord::Base
   include Geokit::Geocoders
-
+  validates :title,   presence: true
+  validates :city,    presence: true 
+  validates :country, presence: true
+  validates :state,   presence: true
   belongs_to :trip
-  # acts_as_mappable  :auto_geocode => true
   after_create :get_location
 
 
