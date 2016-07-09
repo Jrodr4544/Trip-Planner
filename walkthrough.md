@@ -10,3 +10,12 @@ I wrote down the requirements for the project such as the models and their attri
 
 The first tasks I took down were creating migrations, adding Devise, and models as well as associations. I generated the Rails environment for this application using the 'rails new' command. Once that was built out, I added some attributes to the migrations and tested out the associations. Afterwards I created a Welcome controller to start building out some actions and views. This lead me to add the bootstrap template, which was rather familiar to implement since I have already done this with my sinatra project.
 
+I've realized that by starting out writing every step down and tackling them, you are able to code much more peaceful and quicker as opposed to just right out coding.
+
+After I generated the views I wanted and I decided to add the google maps feature that would map out all the objectives for a trip. This was pretty challenging and I'm glad the learn experts helped me figure it out. After reading through the google maps documentations for markers and how to include the map on your page I looked through several resources including forums to see what would be the best option. I found some snippets online and started debugging to fit my code. The challenging part was figuring out the right way to geocode the addresses based off the current attributes (city, state, and country). I found a neat gem called 'geokit-rails' that was not so difficult to implement after understanding the docs. 
+
+One of the learn experts suggested adding latitude and longitude columns so that the map would load faster by storing the locations in the database as opposed to making an api call per location. This worked fabulously. I created two methods, one to concatenate the string for the location and another that would geocode as well as store that location in the database.
+ 
+I'll admit, the map was a great learning experience. I was able to call a ruby arrays and store them in javascript variables so that the map would render the information I wanted. Super cool!
+
+
