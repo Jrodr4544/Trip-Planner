@@ -45,5 +45,4 @@ class ObjectivesController < ApplicationController
       params.require(:objective).permit(:title, :city, :state, :country, :notes, :trip_id)
     end
 
-
 end
