@@ -1,3 +1,51 @@
+<%console%>
+
+
+    <script>
+      var map;
+      var markers = <%= @locations.to_json %>;
+
+      function initMap() {
+        var myLatLng = {lat: -34.397, lng: 150.644} 
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 8
+        });
+
+        // var infowindow = new google.maps.InfoWindow(), marker, i;
+
+        // for (i = 0; i < markers.length; i++) {  
+        //     marker = new google.maps.Marker({
+        //         position: new google.maps.LatLng(markers[i]),
+        //         map: map
+        //     });
+        //     google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        //         return function() {
+        //             infowindow.setContent(markers[i][0]);
+        //             infowindow.open(map, marker);
+        //         }
+        //     })(marker, i));
+        // }
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+        });
+      }
+
+
+    </script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA&callback=initMap"
+    async defer></script>
+  
+
+  <!-- Add Div to body -->
+<div id="map" style="width:500px;height:380px;"></div>
+
+
+
+
 <h1><%= @trip.title %></h1>
 
 <% if @trip.objectives.blank? %>
@@ -5,7 +53,7 @@
 <% end %>  
   <ul>
   <% @trip.objectives.each do |objective| %>
-
+    <li><%= objective.title   %></li>
     <li><%= objective.city    %></li>
     <li><%= objective.state   %></li>
     <li><%= objective.country %></li>
@@ -14,6 +62,7 @@
     <br>
   <% end %>
   </ul>
+
 
 <%= link_to "Create a new trip", new_trip_path %> | <%= link_to "Modify trip", edit_trip_path(@trip) %>
 
