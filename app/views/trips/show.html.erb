@@ -1,37 +1,45 @@
-<%console%>
-
 
     <script>
       var map;
-      var markers = <%= @locations.to_json %>;
+      var markers     = <%= @locations.to_json.html_safe %>;
+      var objectives  = <%= @trip.objectives.to_json.html_safe %>;
 
       function initMap() {
         var myLatLng = {lat: -34.397, lng: 150.644} 
 
         map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
+          center: markers[0],
           zoom: 8
         });
 
-        // var infowindow = new google.maps.InfoWindow(), marker, i;
+        var infowindow = new google.maps.InfoWindow(), marker, i;
+        var bounds = new google.maps.LatLngBounds();
 
-        // for (i = 0; i < markers.length; i++) {  
-        //     marker = new google.maps.Marker({
-        //         position: new google.maps.LatLng(markers[i]),
-        //         map: map
-        //     });
-        //     google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        //         return function() {
-        //             infowindow.setContent(markers[i][0]);
-        //             infowindow.open(map, marker);
-        //         }
-        //     })(marker, i));
-        // }
+        for (i = 0; i < markers.length; i++) {  
+            marker = new google.maps.Marker({
+                position: markers[i],
+                map: map
+            });
+            
+            // extending a bounds range per marker 
+            bounds.extend(marker.position);
 
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infowindow.setContent(objectives[i].title);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+
+        // Fitting map to bounds
+        map.fitBounds(bounds);
+
+        var listener = google.maps.event.addListener(map, "idle", function () {
+            map.setZoom(8);
+            google.maps.event.removeListener(listener);
         });
+
       }
 
 
