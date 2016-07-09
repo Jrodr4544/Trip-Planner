@@ -7,7 +7,8 @@ class TripsController < ApplicationController
   end
 
   def show
-    @locations = @trip.objectives.map {|objective| "#{objective.lat}, "+"#{objective.lng}" if !objective.lat && !objective.lng }
+    @locations = []
+    @trip.objectives.map {|objective| @locations << {lat: objective.lat,lng: objective.lng} if objective.lat || objective.lng }.compact
   end
 
   def new
