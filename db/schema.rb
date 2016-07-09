@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705011908) do
+ActiveRecord::Schema.define(version: 20160709012238) do
 
   create_table "objectives", force: :cascade do |t|
     t.string  "title"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160705011908) do
     t.string  "state"
     t.text    "notes"
     t.integer "trip_id"
+    t.float   "lat"
+    t.float   "lng"
     t.index ["trip_id"], name: "index_objectives_on_trip_id"
   end
 
