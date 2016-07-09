@@ -3,6 +3,10 @@ source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
+# Use Omniauth for additional authentication
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 # Use Devise for authentication
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
