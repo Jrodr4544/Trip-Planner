@@ -1,7 +1,8 @@
-source 'https://rubygems.org'
-
+# source 'https://rubygems.org'
+source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
+
 # Use Devise for authentication
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
