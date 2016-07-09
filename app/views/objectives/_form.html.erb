@@ -1,4 +1,15 @@
 <%= form_for(@objective) do |f| %>
+  <% if @objective.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h4>
+
+      <ul>
+      <% @objective.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :title %><br />
