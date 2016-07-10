@@ -18,4 +18,6 @@ One of the learn experts suggested adding latitude and longitude columns so that
  
 I'll admit, the map was a great learning experience. I was able to call a ruby arrays and store them in javascript variables so that the map would render the information I wanted. Super cool!
 
+Lastly, I noticed I was missing some validations and validation error messages as well as Facebook authentication features. So I added these last two features by including some validations in my models and then specifying validation errors in the form templates. Added Facebook authentication required adding two gems 'omniauth' and 'omniauth-facebook'. After adding the gems, part of the configuration process required adding a couple things which included a facebook api key and secret, a setter method for facebook authentication attributes, as well as a controller to handle the callbacks. I added two columns to my users model as provider and uid, so that omniauth can set them when a user decides to sign in using Facebook. I had a lot of trouble trying to get an omniauth user to clear their session because after signing out, if anyone tried to log in using Facebook on the same computer they wouldn't get a Facebook login prompt because the other Facebook user's session was still active!
+
 
