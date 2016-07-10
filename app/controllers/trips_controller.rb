@@ -2,8 +2,12 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def index
-    @trips = current_user.trips 
-    redirect_to '/trips/new' if @trips.blank?
+    if current_user
+      @trips = current_user.trips 
+      redirect_to '/trips/new' if @trips.blank? 
+    else
+      redirect_to root_path
+    end
   end
 
   def show
