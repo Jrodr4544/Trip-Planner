@@ -3,6 +3,9 @@ source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
+# Handling env variables before omniauth
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+
 # Use Omniauth for additional authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -50,6 +53,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Handling env variables
+  gem 'dotenv-rails', :groups => [:development, :test]
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
