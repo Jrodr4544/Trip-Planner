@@ -38,8 +38,10 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><%= link_to "Home", root_path %></li>
+
             <% if user_signed_in? %>
-              <li role="presentation"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            <%= javascript_include_tag :defaults %>
+              <li role="presentation"><%= link_to "Sign out", destroy_user_session_path(current_user), :method => :delete %></li>
               <li role="presentation"><%= link_to current_user.name, user_path(current_user) %></li>
             <% else %>
               <li role="presentation"><%= link_to "Sign in", new_user_session_path %></li>
