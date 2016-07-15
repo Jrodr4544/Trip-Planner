@@ -1,24 +1,20 @@
-# README
+# Trip-Planner
+## Plan your trips
+This Rails project was created for my assessment at [Learn.co](https://learn.co
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Purpose
+Map out your trips with objectives and see them on a map.
 
-Things you may want to cover:
+### Getting Started
 
-* Ruby version
+To get started, please install the gems for this app by running
 
-* System dependencies
+`bundle`
 
-* Configuration
+After you run bundle to install all the gems. Make sure you run the server locally by using 
 
-* Database creation
+`rails server localhost`
 
-* Database initialization
+### Notes
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Might not be able to use APIs because of the restriction on requests by IP
