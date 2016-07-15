@@ -1,6 +1,6 @@
 # Trip-Planner
 ## Plan your trips
-This Rails project was created for my assessment at [Learn.co](https://learn.co
+This Rails project was created for my assessment at [Learn.co](https://learn.co)
 
 ### Purpose
 Map out your trips with objectives and see them on a map.
