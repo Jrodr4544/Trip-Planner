@@ -6,12 +6,15 @@ class Objective < ActiveRecord::Base
   validates :country, presence: true
   validates :state,   presence: true
   belongs_to :trip
-  after_create :get_location
+  belongs_to :location
 
+  after_create :create_location
 
-  def get_location
+  def create_location
     place = Geokit::Geocoders::GoogleGeocoder.geocode(to_addr)
-    self.update(lat: place.lat,lng: place.lng)
+    Location.create(lat: place.lat,lng: place.lng)
+    Location.last.save
+    self.update(location_id: Location.last.id)
   end
 
   def to_addr
