@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709222042) do
+ActiveRecord::Schema.define(version: 20160725043652) do
+
+  create_table "locations", force: :cascade do |t|
+    t.float "lat"
+    t.float "lng"
+  end
 
   create_table "objectives", force: :cascade do |t|
     t.string  "title"
@@ -21,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160709222042) do
     t.integer "trip_id"
     t.float   "lat"
     t.float   "lng"
+    t.integer "location_id"
     t.index ["trip_id"], name: "index_objectives_on_trip_id"
   end
 
