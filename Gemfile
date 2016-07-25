@@ -3,6 +3,9 @@ source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
+# Use gon to hide api keys
+# gem 'gon'
+
 # Handling env variables before omniauth
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
