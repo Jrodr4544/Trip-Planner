@@ -1,6 +1,6 @@
 Trip Planner Walkthrough
 
-I like including walkthrough's but not only because they are required but because they help my train of thought. I also think they're a great place to go back to once you've improved your skillset which includes blogging.
+I like including walkthrough's but not only because they are required but because they help me improve. I also think they're a great place to go back to once you've improved your skillset which includes blogging.
 
 For the Rails Assessment project at Flatiron's Learn full stack web development program, I decided to build an application called "Trip Planner". This was one of the ideas I thought of while brainstorming as well as a bucket list. I've planned trips in the past and I'm actually in the process of planning one now. I figured why not create an application based on the functionality I think would be cool to have.
 
