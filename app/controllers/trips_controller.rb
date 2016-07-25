@@ -11,8 +11,10 @@ class TripsController < ApplicationController
   end
 
   def show
+    # gon.googleMapsApi = "AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA"
+    # @key = gon.googleMapsApi
     @locations = []
-    @trip.objectives.map {|objective| @locations << {lat: objective.lat,lng: objective.lng} if objective.lat || objective.lng }.compact
+    @trip.locations.map {|location| @locations << {lat: location.lat,lng: location.lng} if location.lat || location.lng }.compact
   end
 
   def new
