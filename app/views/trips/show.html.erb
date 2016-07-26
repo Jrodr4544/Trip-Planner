@@ -61,18 +61,18 @@
 <% end %>  
   <ul>
   <% @trip.objectives.each do |objective| %>
-    <li><%= objective.title   %></li>
+    <li><h4><%= link_to objective.title, trip_objective_path(objective.trip, objective) %></h4></li>
     <li><%= objective.city    %></li>
     <li><%= objective.state   %></li>
     <li><%= objective.country %></li>
     <li><%= objective.notes   %></li>
-    <li><%= link_to "Edit this objective", edit_objective_path(objective) %></li>
+    <li><%= link_to "Edit this objective", edit_trip_objective_path(objective) %></li>
     <br>
   <% end %>
   </ul>
 
+<%= render 'layouts/links' %>
 
-<%= link_to "Create a new trip", new_trip_path %> | <%= link_to "Modify trip", edit_trip_path(@trip) %> | <%= link_to "Add objective", new_objective_path %>
 
 
 
