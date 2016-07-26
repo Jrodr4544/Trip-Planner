@@ -42,7 +42,7 @@
 
             <% if user_signed_in? %>
             <%= javascript_include_tag :defaults %>
-              <li role="presentation"><%= link_to "Sign out", destroy_user_session_path(current_user), :method => :delete %></li>
+              <li role="presentation"><%= link_to "Sign out", destroy_user_session_path(current_user) %></li>
               <li role="presentation"><%= link_to current_user.name, user_path(current_user) %></li>
             <% else %>
               <li role="presentation"><%= link_to "Sign in", new_user_session_path %></li>
