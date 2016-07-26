@@ -1,3 +1,5 @@
 <h1>Edit your objective:</h1>
 
 <%= render 'form' %>
+
+<%= link_to 'Show',  trip_objective_path(@objective) %> | <%= link_to 'Back', trip_objectives_path(@objective.trip) %>
