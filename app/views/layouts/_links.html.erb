@@ -2,7 +2,7 @@
 <% if @trip %>
   <%= link_to "Modify trip", edit_trip_path(@trip) %>
 <% end %>
-   | <%= link_to "Add objective", new_objective_path %> |
+   | 
 <% if @objective %>
-  <%= link_to @objective.trip.title, trip_path(@objective.trip) %> | <%= link_to "Delete objective", trip_objective_path, data: { confirm: "Are you sure?" }, method: :delete %>
+  <%= link_to @objective.trip.title, trip_path(@objective.trip) %> | <%= link_to "Delete objective", trip_objective_path(@objective.trip, @objective), data: { confirm: "Are you sure?" }, method: :delete %>
 <% end %>
