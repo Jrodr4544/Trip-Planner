@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#home"
-  resources :trips
-  resources :objectives
+  delete  '/trips/:trip_id/objectives/:id' => 'objectives#destroy', as: "kill_objective"
+  
+  resources :trips do  
+    resources :objectives
+  end
+
+  resources :objectives, :only => [:new, :update]
 end
