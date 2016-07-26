@@ -1,4 +1,4 @@
-<%= form_for(@objective) do |f| %>
+<%= form_for([@objective.trip, @objective]) do |f| %>
   <% if @objective.errors.any? %>
     <div id="error_explanation">
       <h4><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h4>
