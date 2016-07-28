@@ -21,7 +21,12 @@
     <%= f.text_field :description, autofocus: true %>
   </div>
   <br>
+  <label>New Objective:</label>
+      <%= f.fields_for :objectives do |ff| %>
+        <%= render :partial => 'objectives/form_elements', :locals => { :f => ff} %>
+      <% end %>
 
+  <br>
   <div class="actions">
     <%= f.submit "Submit" %>
   </div>
