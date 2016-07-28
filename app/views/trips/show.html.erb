@@ -57,7 +57,7 @@
 <h1><%= @trip.title %></h1>
 
 <% if @trip.objectives.blank? %>
-  <li><%= link_to "Create New Objective", new_objective_path %></li>
+  <li><%= link_to "Create New Objective", new_trip_objective_path(@trip) %></li>
 <% end %>  
   <ul>
   <% @trip.objectives.each do |objective| %>
