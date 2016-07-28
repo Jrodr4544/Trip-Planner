@@ -19,13 +19,13 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    @objective = @trip.objectives.new
+    @trip.objectives.build
   end
 
   def create
-    @trip = Trip.create(trip_params)
+    @trip = Trip.create(title: trip_params["title"], description: trip_params["description"])
+    @trip.objectives.build(trip_params["objectives"])
     current_user.trips << @trip
-
     if @trip.save
       redirect_to @trip, notice: 'Trip was successfully created.'
     else
@@ -55,7 +55,7 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      params.require(:trip).permit(:title, :description)
+      params.require(:trip).permit(:title, :description, :objectives => [:title, :city, :state, :country, :notes])
     end
 
 end
