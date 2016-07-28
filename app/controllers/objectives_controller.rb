@@ -25,7 +25,7 @@ class ObjectivesController < ApplicationController
   end
 
   def edit
-    @objective = @trip.objectives.find(params[:id])
+    @objective = Objective.find(params[:id])
   end
 
   def update
