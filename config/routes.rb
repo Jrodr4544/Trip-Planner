@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   root to: "welcome#home"
   delete  '/trips/:trip_id/objectives/:id' => 'objectives#destroy', as: "kill_objective"
   
+
   resources :trips do  
     resources :objectives
   end
 
   resources :objectives, :only => [:new, :update]
+  post "/objectives" => "objectives#create", :as => :create_objective
 end
