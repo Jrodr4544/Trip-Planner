@@ -1,8 +1,9 @@
 <%= link_to "Create a new trip", new_trip_path %> |
 <% if @trip %>
-  <%= link_to "Modify trip", edit_trip_path(@trip) %>
+  <%= link_to "Modify trip", edit_trip_path(@trip) %> |
+  <%= link_to "Add Objective", new_trip_objective_path(@trip) %>
 <% end %>
-   | 
 <% if @objective %>
-  <%= link_to @objective.trip.title, trip_path(@objective.trip) %> | <%= link_to "Delete objective", trip_objective_path(@objective.trip, @objective), data: { confirm: "Are you sure?" }, method: :delete %>
+  
+<%= button_to "Delete objective", { action: "destroy", id: @objective.id }, method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
