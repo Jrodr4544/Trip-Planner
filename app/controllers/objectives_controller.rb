@@ -1,6 +1,6 @@
 class ObjectivesController < ApplicationController
   # before_action :set_objective, only: [:edit, :update, :destroy]
-  before_action :set_trip, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :set_trip, only: [:index, :show, :create, :edit, :update, :destroy]
 
   def index
     @objectives = @trip.objectives
@@ -11,7 +11,7 @@ class ObjectivesController < ApplicationController
   end
 
   def new
-    @objective = @trip.objectives.build
+    @objective = Objective.new
   end
 
   def create
@@ -39,8 +39,7 @@ class ObjectivesController < ApplicationController
   end
 
   def destroy
-    binding.pry
-    @objective = @trip.objective
+    @objective = @trip.objectives.find(params[:id])
     @objective.destroy
     redirect_to trips_path
   end
@@ -48,8 +47,10 @@ class ObjectivesController < ApplicationController
   private
 
     def set_trip
-      if params[:trip_id]
+      if params[:trip_id] 
         @trip = Trip.find(params[:trip_id]) 
+      elsif params["objective"]["trip_id"]
+        @trip = Trip.find(params["objective"]["trip_id"])
       else
         @trip = Objective.find(params[:id]).trip
       end
