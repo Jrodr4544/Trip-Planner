@@ -66,7 +66,7 @@
     <li><%= objective.state   %></li>
     <li><%= objective.country %></li>
     <li><%= objective.notes   %></li>
-    <li><%= link_to "Edit this objective", edit_trip_objective_path(objective) %></li>
+    <li><%= link_to "Edit this objective", edit_trip_objective_path(@trip, objective) %></li>
     <br>
   <% end %>
   </ul>
