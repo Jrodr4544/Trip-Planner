@@ -62,9 +62,6 @@
   <ul>
   <% @trip.objectives.each do |objective| %>
     <li><h4><%= link_to objective.title, trip_objective_path(objective.trip, objective) %></h4></li>
-    <li><%= objective.city    %></li>
-    <li><%= objective.state   %></li>
-    <li><%= objective.country %></li>
     <li><%= objective.notes   %></li>
     <li><%= link_to "Edit this objective", edit_trip_objective_path(@trip, objective) %></li>
     <br>
