@@ -17,9 +17,9 @@
     <%= f.collection_select :trip_id, current_user.trips.all, :id, :title %>
   </div>
   <br>
-<%binding.pry%>
+
   <div>
-    <%= f.collection_select :location_id, current_user.locations.all, :id, :title %>
+    <%= f.collection_select :location_id, Location.all, :id, :city %>
   </div>
 
   <div class="actions">
