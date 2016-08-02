@@ -10,6 +10,7 @@
     <% current_user.trips.each do |trip| %>
       <h4><%= link_to trip.title, trip_path(trip) %></h4>
       <p><%= trip.description %></p>
+      <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
   <% end %>
   </div>
