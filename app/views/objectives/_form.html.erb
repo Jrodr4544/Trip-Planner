@@ -13,17 +13,5 @@
 
   <%= render :partial => 'form_elements', :locals => { :f => f} %>
 
-  <div>
-    <%= f.collection_select :trip_id, current_user.trips.all, :id, :title %>
-  </div>
-  <br>
-
-  <div>
-    <%= f.collection_select :location_id, Location.all, :id, :city %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
-  <br>
+  
 <% end %>
