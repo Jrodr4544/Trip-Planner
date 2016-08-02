@@ -9,18 +9,18 @@
     <%= f.text_field :notes %>
   </div>
 
+<!-- if a trip exists no need to select another -->
+<% if @trip == nil %>
   <div>
     <%= f.collection_select :trip_id, current_user.trips.all, :id, :title %>
   </div>
   <br>
+<% end %>
 
   <div>
     <%= f.collection_select :location_id, Location.all, :id, :city %>
   </div>
   <br>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
-  <br>
+  
   
