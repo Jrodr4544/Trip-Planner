@@ -1,8 +1,11 @@
 <div class="well">
     <div class="col-lg-6">
   <h2><%= @objective.title %></h2>
-  <% if current_user %>
-    <h4><%= @objective.notes   %></h4>
+  <% if @objective.location %>
+    <h4>Note: <%= @objective.notes   %></h4>
+    <h4>City: <%= @objective.location.city    %></h4>
+    <h4>State: <%= @objective.location.state   %></h4>
+    <h4>Country: <%= @objective.location.country %></h4>
     <br>
   <% end %>
 
