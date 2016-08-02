@@ -57,7 +57,7 @@ class ObjectivesController < ApplicationController
     end
 
     def objective_params
-      params.require(:objective).permit(:title, :city, :state, :country, :notes, :trip_id)
+      params.require(:objective).permit(:title, :city, :state, :country, :notes, :trip_id, :location_id)
     end
 
 end
