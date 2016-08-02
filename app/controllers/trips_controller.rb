@@ -23,9 +23,8 @@ class TripsController < ApplicationController
   end
 
   def create
-    binding.pry
     @trip      = Trip.create(title: trip_params["title"], description: trip_params["description"])
-    @objective = @trip.objectives.build(trip_params["objectives"])
+    @objective = @trip.objectives.build(trip_params["objectives_attributes"])
     current_user.trips << @trip
     if @trip.save
       redirect_to '/trips', notice: 'Trip was successfully created.'
