@@ -2,7 +2,7 @@
     <div class="col-lg-6">
   <% if current_user %>
     <% @locations.each do |location| %>
-      <h3>Location <%= location.id %></h3>
+      <h3><%= link_to 'Location', location_path(location) %> <%= location.id %></h3>
       <h4><%= location.lat %></h4>
       <p><%= location.lng %></p>
     <% end %>
