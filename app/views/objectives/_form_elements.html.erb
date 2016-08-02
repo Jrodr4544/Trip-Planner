@@ -1,4 +1,5 @@
-<div class="field">
+
+  <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title, autofocus: true %>
   </div>
@@ -8,4 +9,18 @@
     <%= f.text_field :notes %>
   </div>
 
+  <div>
+    <%= f.collection_select :trip_id, current_user.trips.all, :id, :title %>
+  </div>
+  <br>
+
+  <div>
+    <%= f.collection_select :location_id, Location.all, :id, :city %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+  <br>
   
