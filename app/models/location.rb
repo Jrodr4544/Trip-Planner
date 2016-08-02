@@ -5,4 +5,18 @@ validates :city,    presence: true
 validates :country, presence: true
 validates :state,   presence: true
 
+include Geokit::Geocoders
+after_create :set_location
+
+  def set_location
+    place = Geokit::Geocoders::GoogleGeocoder.geocode(to_addr)
+    Location.update(lat: place.lat,lng: place.lng)
+    Location.last.save
+    # self.update(location_id: Location.last.id)
+  end
+
+  def to_addr
+    "#{self.city}" + ", #{self.state}" + ", #{self.country}"
+  end
+
 end
