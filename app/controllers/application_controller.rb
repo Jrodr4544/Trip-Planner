@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   # Adding this will allow strong parameters to devise_controller
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # Redirecting to sign in after sign out
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path 
+  end
+
   protected
 
     def configure_permitted_parameters
