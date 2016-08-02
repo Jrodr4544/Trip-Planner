@@ -23,11 +23,12 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.create(title: trip_params["title"], description: trip_params["description"])
-    @trip.objectives.build(trip_params["objectives"])
+    binding.pry
+    @trip      = Trip.create(title: trip_params["title"], description: trip_params["description"])
+    @objective = @trip.objectives.build(trip_params["objectives"])
     current_user.trips << @trip
     if @trip.save
-      redirect_to @trip, notice: 'Trip was successfully created.'
+      redirect_to '/trips', notice: 'Trip was successfully created.'
     else
       render :new
     end
@@ -46,6 +47,10 @@ class TripsController < ApplicationController
   end
 
   def destroy
+    if current_user
+      @trip.destroy
+      redirect_to trips_path
+    end
   end
 
   private
@@ -55,7 +60,7 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      params.require(:trip).permit(:title, :description, :objectives => [:title, :notes, :location_id])
+      params.require(:trip).permit(:title, :description, :objectives_attributes => [:title, :notes, :location_id])
     end
 
 end
