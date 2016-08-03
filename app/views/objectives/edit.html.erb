@@ -4,6 +4,12 @@
 
 <%= render :partial => 'form_elements', :locals => { :f => f} %>
 
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+  <br>
 <% end %>
 
-<%= link_to 'Show',  trip_objective_path(@objective) %> | <%= link_to 'Back', trip_objectives_path(@objective.trip) %>
+<%= link_to 'Show',  trip_objective_path(@objective) %> | <%= link_to 'Back', trip_path(@objective.trip) %> |
+
+<%= render 'layouts/links' %>
