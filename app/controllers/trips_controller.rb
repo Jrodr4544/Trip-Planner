@@ -15,7 +15,6 @@ class TripsController < ApplicationController
     # @key = gon.googleMapsApi
     @locations = []
     @trip.locations.map {|location| @locations << {lat: location.lat,lng: location.lng} if location.lat || location.lng }.compact
-    # binding.pry
   end
 
   def new
