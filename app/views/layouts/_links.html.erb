@@ -1,10 +1,13 @@
-<%= link_to "Create a new trip", new_trip_path %> |
-<% if @trip %>
 
+<%= link_to "Create a new trip", new_trip_path %> | <%= link_to "Add Location", new_location_path %> |
+
+<% if @trip %>
   <%= link_to "Modify trip", edit_trip_path(@trip) %> |
-  <%= link_to "New Objective", new_objective_path %> | <%= link_to "Add Location", new_location_path %>
+  <%= link_to "Add Objective", new_trip_objective_path(@trip) %>
 <% end %>
+
 <% if @objective %>
-| <%= link_to "Modify Trip Objective", edit_trip_objective_path(@trip, @objective) %> | 
-<%= button_to "Delete objective", { action: "destroy", id: @objective.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% if @objective.id != nil%>
+| <%= link_to "Modify Trip Objective", edit_trip_objective_path(@trip, @objective) %>
+  <% end %>
 <% end %>
