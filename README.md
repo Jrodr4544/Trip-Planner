@@ -7,11 +7,11 @@ Map out your trips with objectives and see them on a map for user-friendly acces
 
 `1. Sign Up or Sign In`
 
-`2. Click Trip-Planner to create first trip!`
+`2. Click your Username to create first trip!`
 
-`3. Create New Objective for your trip`
+`3. Create New Objective for your trip and add a location`
 
-You can also add or modify objectives. Have fun!
+You can add or modify objectives. Have fun!
 
 ### Getting Started
 
@@ -30,7 +30,7 @@ If you do not already have a file in the root directory of the app, create one c
 `FACEBOOK_APP_ID=APP_ID_GOES_HERE`
 `FACEBOOK_SECRET=SECRET_GOES_HERE`
 
-Storing the google maps api is handled differently because it is loaded into javascript. At the moment since this is running locally, the api key is stored within html script tag.
+Storing the google maps api is handled differently because it is loaded into javascript. At the moment since this is running locally, the api key is stored within an html script tag.
 
 ### Notes
 
