@@ -1,69 +1,73 @@
+<% if @locations.blank? %>
+  <p><small>* No locations. No map *</small></p>
+<% else %>
+      <script>
+        var map;
+        var markers     = <%= @locations.to_json.html_safe %>;
+        var objectives  = <%= @trip.objectives.to_json.html_safe %>;
 
-    <script>
-      var map;
-      var markers     = <%= @locations.to_json.html_safe %>;
-      var objectives  = <%= @trip.objectives.to_json.html_safe %>;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: markers[0],
+            zoom: 8
+          });
 
-      function initMap() {
-        var myLatLng = {lat: -34.397, lng: 150.644} 
+          var infowindow = new google.maps.InfoWindow(), marker, i;
+          var bounds = new google.maps.LatLngBounds();
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: markers[0],
-          zoom: 8
-        });
+          for (i = 0; i < markers.length; i++) {  
+              marker = new google.maps.Marker({
+                  position: markers[i],
+                  map: map
+              });
+              
+              // extending a bounds range per marker 
+              bounds.extend(marker.position);
 
-        var infowindow = new google.maps.InfoWindow(), marker, i;
-        var bounds = new google.maps.LatLngBounds();
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                  return function() {
+                      infowindow.setContent(objectives[i].title);
+                      infowindow.open(map, marker);
+                  }
+              })(marker, i));
+          }
 
-        for (i = 0; i < markers.length; i++) {  
-            marker = new google.maps.Marker({
-                position: markers[i],
-                map: map
-            });
-            
-            // extending a bounds range per marker 
-            bounds.extend(marker.position);
+          // Fitting map to bounds
+          map.fitBounds(bounds);
 
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent(objectives[i].title);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
+          var listener = google.maps.event.addListener(map, "idle", function () {
+              map.setZoom(6);
+              google.maps.event.removeListener(listener);
+          });
+
         }
-
-        // Fitting map to bounds
-        map.fitBounds(bounds);
-
-        var listener = google.maps.event.addListener(map, "idle", function () {
-            map.setZoom(6);
-            google.maps.event.removeListener(listener);
-        });
-
-      }
 
 
     </script>
-   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA&callback=initMap"
-    async defer></script>
-  
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA&callback=initMap"
+      async defer></script>
+    
 
-  <!-- Add Div to body -->
-<div id="map" style="width:500px;height:380px;"></div>
-
-
-
+    <!-- Add Div to body -->
+  <div id="map" style="width:500px;height:380px;"></div>
+<% end %>  
 
 <h1><%= @trip.title %></h1>
 
-<% if @trip.objectives.blank? %>
-  <li><%= link_to "Create New Objective", new_trip_objective_path(@trip) %></li>
-<% end %>  
   <ul>
   <% @trip.objectives.each do |objective| %>
     <li><h4><%= link_to objective.title, trip_objective_path(objective.trip, objective) %></h4></li>
-    <li><%= objective.notes   %></li>
+    <% if objective.location %>
+      <li>City: <%= objective.location.city    %></li>
+      <li>State: <%= objective.location.state   %></li>
+      <li>Country: <%= objective.location.country %></li>
+      <li>Notes: <%= objective.notes            %></li>
+    <% else %>
+      <p><small>No location. Please edit this objective and select a location or add one below!</small></p>
+    <% end %>
     <li><%= link_to "Edit this objective", edit_trip_objective_path(@trip, objective) %></li>
+        <%= button_to "Delete Objective", trip_objective_path(@trip, objective), method: :delete, data: { confirm: "Are you sure?" } %>
     <br>
   <% end %>
   </ul>
