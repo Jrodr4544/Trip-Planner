@@ -6,10 +6,11 @@ belongs_to  :user
 accepts_nested_attributes_for :objectives
 
   def objectives_attributes=(objectives_attributes)
+    # raise objectives_attributes.inspect
     objectives_attributes.values.each do |objective_attribute|
       objective = Objective.find_or_create_by(objective_attribute)
-      self.objectives << category
+      self.objectives << objective
     end
-  end
+  end   
 
 end
