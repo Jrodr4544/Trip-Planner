@@ -3,8 +3,11 @@
   <% if current_user %>
     <% @locations.each do |location| %>
       <h3><%= link_to 'Location', location_path(location) %> <%= location.id %></h3>
-      <h4><%= location.lat %></h4>
-      <p><%= location.lng %></p>
+      <p><%= location.city %></p>
+      <p><%= location.lat  %></p>
+      <p><%= location.lng  %></p>
+      <br>
+      <%= button_to "Delete Location", { action: "destroy", id: location.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
   <% end %>
   </div>
