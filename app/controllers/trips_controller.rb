@@ -15,6 +15,7 @@ class TripsController < ApplicationController
     # @key = gon.googleMapsApi
     @locations = []
     @trip.locations.map {|location| @locations << {lat: location.lat,lng: location.lng} if location.lat || location.lng }.compact
+    # binding.pry
   end
 
   def new
@@ -24,8 +25,9 @@ class TripsController < ApplicationController
 
   def create
     @trip      = Trip.create(title: trip_params["title"], description: trip_params["description"])
-    @objective = @trip.objectives.build(trip_params["objectives_attributes"])
+    @trip.objectives_attributes = trip_params["objectives_attributes"]
     current_user.trips << @trip
+    
     if @trip.save
       redirect_to '/trips', notice: 'Trip was successfully created.'
     else
