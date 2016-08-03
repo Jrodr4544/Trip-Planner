@@ -1,7 +1,8 @@
 class LocationsController < ApplicationController
 
   def index
-    @locations = current_user.objectives.map { |objective| objective.trip.locations }.flatten 
+    # @locations = current_user.objectives.map { |objective| objective.trip.locations }.flatten 
+    @locations = Location.all
   end
 
   def new
@@ -16,6 +17,12 @@ class LocationsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @location = Location.find(params["id"])
+    @location.destroy
+    redirect_to locations_path
   end
 
   private
