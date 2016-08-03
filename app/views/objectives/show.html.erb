@@ -7,8 +7,8 @@
     <h4>State: <%= @objective.location.state   %></h4>
     <h4>Country: <%= @objective.location.country %></h4>
     <br>
+    <%= button_to "Delete objective", { action: "destroy", id: @objective.id }, method: :delete, data: { confirm: "Are you sure?" } %>
   <% end %>
-
   </div>
 </div>
 
