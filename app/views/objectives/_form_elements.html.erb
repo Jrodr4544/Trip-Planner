@@ -16,11 +16,11 @@
   </div>
   <br>
 <% end %>
-
+  
   <div>
-    <%= f.collection_select :location_id, Location.all, :id, :city %>
+    <%= f.collection_select :location_id, Location.all, :id, :city, {:include_blank => 'Please Select'} %>
   </div>
   <br>
-
+  <p><small>Note: If location is not listed, feel free to add one after creating your objective!</small></p>
   
   
