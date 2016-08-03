@@ -22,4 +22,7 @@ Lastly, I noticed I was missing some validations and validation error messages a
 
 I loved this project and felt really happy with the end result. Now all I can think of is improving it with more features and maybe a better interactive UI.
 
+* Updates *
+
+After having other developers use my app, they gave me a ton of suggestions that I could implement. So I got to it. Some of these suggestions were things like nested forms and nested routes, along with links that would better the user experience. These things made my application much better. I also changed the functionality of some of my models so that a trip's objectives were strictly objectives and so that locations were well.. locations. This meant that I had to move my geocoding functionality over to the location model. Now anyone can create a location and anyone can also use that location for their trip's objective. Awesome, right?! I thought so too. I even added a neat function to show the city with the most booked trips to encourage users to go there ;-)
 
