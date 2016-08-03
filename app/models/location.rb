@@ -17,4 +17,8 @@ after_create :set_location
     "#{self.city}" + ", #{self.state}" + ", #{self.country}"
   end
 
+  def self.city_with_most_trips
+    self.all.max_by {|location| location.trips.length}.city
+  end
+
 end
