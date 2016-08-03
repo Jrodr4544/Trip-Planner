@@ -15,10 +15,11 @@ class ObjectivesController < ApplicationController
   end
 
   def create
-    @objective = @trip.objectives.create(objective_params)
+    @objective      = Objective.create(objective_params)
+    # current_user.trip.objectives << @objective
 
     if @objective.save
-      redirect_to '/trips', notice: 'Objective was successfully created.'
+      redirect_to user_path(current_user), notice: 'Objective was successfully created.'
     else
       render :new
     end
@@ -32,7 +33,7 @@ class ObjectivesController < ApplicationController
     @objective = @trip.objectives.find(params[:id])
 
     if @objective.update(objective_params)
-      redirect_to '/trips', notice: 'Objective was successfully updated.'
+      redirect_to user_path(current_user), notice: 'Objective was successfully updated.'
     else
       render :edit
     end
@@ -41,7 +42,7 @@ class ObjectivesController < ApplicationController
   def destroy
     @objective = @trip.objectives.find(params[:id])
     @objective.destroy
-    redirect_to trips_path
+    redirect_to user_path(current_user)
   end
 
   private
