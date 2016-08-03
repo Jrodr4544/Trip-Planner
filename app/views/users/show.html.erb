@@ -6,6 +6,7 @@
     <p>Email: <%= current_user.email %></p>
     <br>
 
+    <p><small>View a trip and add objectives!</small></p>
     <h4>Trips:</h4>
     <% current_user.trips.each do |trip| %>
       <h4><%= link_to trip.title, trip_path(trip) %></h4>
