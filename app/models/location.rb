@@ -10,9 +10,7 @@ after_create :set_location
 
   def set_location
     place = Geokit::Geocoders::GoogleGeocoder.geocode(to_addr)
-    Location.update(lat: place.lat,lng: place.lng)
-    Location.last.save
-    # self.update(location_id: Location.last.id)
+    self.update(lat: place.lat,lng: place.lng)
   end
 
   def to_addr
