@@ -35,7 +35,7 @@ class TripsController < ApplicationController
   end
 
   def edit
-
+    @trip
   end
 
   def update
