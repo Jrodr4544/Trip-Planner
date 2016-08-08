@@ -1,5 +1,4 @@
 class ObjectivesController < ApplicationController
-  # before_action :set_objective, only: [:edit, :update, :destroy]
   before_action :set_trip, only: [:index, :show, :create, :edit, :update, :destroy]
 
   def index
@@ -15,8 +14,7 @@ class ObjectivesController < ApplicationController
   end
 
   def create
-    @objective      = Objective.create(objective_params)
-    # current_user.trip.objectives << @objective
+    @objective = Objective.create(objective_params)
 
     if @objective.save
       redirect_to user_path(current_user), notice: 'Objective was successfully created.'
