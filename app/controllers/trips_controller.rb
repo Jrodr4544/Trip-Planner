@@ -14,7 +14,20 @@ class TripsController < ApplicationController
     # gon.googleMapsApi = "AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA"
     # @key = gon.googleMapsApi
     @locations = []
+    @sortedObjectives = []
+    @states           = []
+
     @trip.locations.map {|location| @locations << {lat: location.lat,lng: location.lng} if location.lat || location.lng }.compact
+    @sortedObjectives = @trip.objectives.sort_by {|objective| objective.location[:state]}
+
+    # every duplicate state will be nil
+    @sortedObjectives.each do |objective|
+      if !@states.include?(objective.location[:state])
+        @states << objective.location[:state]
+      else
+        @states << nil
+      end
+    end
   end
 
   def new
