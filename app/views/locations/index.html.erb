@@ -9,6 +9,8 @@
       <br>
       <%= button_to "Delete Location", { action: "destroy", id: location.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
+      <% else %>
+      <h3>Please Log In</h3>
   <% end %>
   </div>
 </div>
