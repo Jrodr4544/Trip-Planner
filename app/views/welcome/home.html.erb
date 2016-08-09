@@ -1,11 +1,15 @@
 <div class="jumbotron">
-        <h1>Welcome to Trip-Planner!</h1>
+        <h1>Welcome to <br>Trip-Planner!</h1>
         <p class="lead">Plan your trips at ease. That's all we need. Just plan and breathe..</p>
-        <p><%= Location.city_with_most_trips %>, is the most popular city!</p>
-        <p>Book a trip now!</p>
 
+        <div class="well">
+          <p><%= Location.city_with_most_trips %>, is the most popular city!</p>
+          <p>Plan a trip now!</p>
+        </div>
         <% if !user_signed_in? %>
         <p><a class="btn btn-lg btn-success" href="/users/sign_up" role="button">Sign up today</a></p>
+        <% else %>
+        <a class="btn btn-lg btn-success" href="/trips/new" role="button">Here</a>
         <% end %>
       </div>
 
