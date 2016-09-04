@@ -7,6 +7,7 @@
       <br>
       <p><small>View a trip and add objectives!</small></p>
       <h4>Trips:</h4>
+      <a href="#" class="trips">...</a>
       <% @trips.each do |trip| %>
         <h4><%= link_to trip.title, trip_path(trip) %></h4>
         <p><%= trip.description     %></p>
@@ -16,5 +17,22 @@
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript" charset='utf-8'>
+  $(function() {
+    $(".trips").on("click", function() {
+      debugger
+      var id = <%= current_user.id %>;
+
+      $.ajax({
+        url: "/trips",
+        method: 'GET', 
+        success: function(data) {
+          console.log(data)
+        })
+      });
+  });
+
+</script>
 
 <%= render 'layouts/links' %>
