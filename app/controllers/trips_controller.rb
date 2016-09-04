@@ -28,6 +28,11 @@ class TripsController < ApplicationController
         @states << nil
       end
     end
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @trip, root: true}
+    end
   end
 
   def new
