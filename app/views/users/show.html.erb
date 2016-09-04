@@ -1,19 +1,19 @@
 <div class="well">
-    <div class="col-lg-6">
-  <h2>Profile:</h2>
-  <% if current_user %>
-    <h4>Name: <%= current_user.name  %><h4>
-    <p>Email: <%= current_user.email %></p>
-    <br>
-    <p><small>View a trip and add objectives!</small></p>
-    <h4>Trips:</h4>
-    <% @trips.each do |trip| %>
-      <h4><%= link_to trip.title, trip_path(trip) %></h4>
-      <p><%= trip.description     %></p>
+  <div class="col-lg-6">
+    <h2>Profile:</h2>
+    <% if current_user %>
+      <h4>Name: <%= current_user.name  %><h4>
+      <p>Email: <%= current_user.email %></p>
+      <br>
+      <p><small>View a trip and add objectives!</small></p>
+      <h4>Trips:</h4>
+      <% @trips.each do |trip| %>
+        <h4><%= link_to trip.title, trip_path(trip) %></h4>
+        <p><%= trip.description     %></p>
 
-      <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
     <% end %>
-  <% end %>
   </div>
 </div>
 
