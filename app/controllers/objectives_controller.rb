@@ -7,6 +7,11 @@ class ObjectivesController < ApplicationController
 
   def show
     @objective = @trip.objectives.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @objective }
+    end
   end
 
   def new
