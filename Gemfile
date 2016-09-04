@@ -3,8 +3,8 @@ source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
-# Use gon to hide api keys
-# gem 'gon'
+# Using Active Model Serializers (AMS) for jQuery functionality
+gem 'active_model_serializers'
 
 # Handling env variables before omniauth
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
