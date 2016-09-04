@@ -3,6 +3,9 @@ source 'http://rubygems.org'
 # Use geokit gem for map
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
+# Pry gem for testing
+gem 'pry'
+
 # Using Active Model Serializers (AMS) for jQuery functionality
 gem 'active_model_serializers'
 
