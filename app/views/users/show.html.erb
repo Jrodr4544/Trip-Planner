@@ -7,12 +7,13 @@
       <br>
       <p><small>View a trip and add objectives!</small></p>
       <h4>Trips:</h4>
-      <a href="#" class="trips">...</a>
-      <% @trips.each do |trip| %>
-        <h4><%= link_to trip.title, trip_path(trip) %></h4>
-        <p><%= trip.description     %></p>
+      <a class="trips">Click Here</a>
+      <div id="mo-trips"></div>
+      <!-- <% @trips.each do |trip| %> -->
+         <!-- <h4><%= link_to trip.title, trip_path(trip) %></h4> -->
+        <!-- <p><%= trip.description     %></p> -->
 
-        <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+        <!-- <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %> -->
       <% end %>
     <% end %>
   </div>
@@ -20,17 +21,29 @@
 
 <script type="text/javascript" charset='utf-8'>
   $(function() {
-    $(".trips").on("click", function() {
-      debugger
+    $(".trips").click(function() {
       var id = <%= current_user.id %>;
-
       $.ajax({
+        dataType: 'json',
         url: "/trips",
-        method: 'GET', 
+        method: 'GET',
         success: function(data) {
-          console.log(data)
-        })
+          $.each(data, function(index,key) {
+
+            var id           = data[index].id;
+            // the variable below did not let me interpolate id so I had to manually do it
+            var deleteButton = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
+
+            $('#mo-trips').append('<a href=/trips/'+data[index].id+'>'+data[index].title+'</a><br><li>'+data[index].description+'</li><br>'+deleteButton);
+
+            // below I interpolate that id to the button action
+            $('form:eq('+index+')').removeAttr('action');
+            $('form:eq('+index+')').attr('action', '/trips/'+id);
+
+          });
+        }
       });
+    })
   });
 
 </script>
