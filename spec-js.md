@@ -2,8 +2,10 @@
 
 Specs:
 - [x] Use jQuery for implementing new requirements
-- [ ] Include a show page rendered using jQuery and an Active Model Serialization JSON backend.
-- [ ] Include an index page rendered using jQuery and an Active Model Serialization JSON backend.
+- [ ] Include a show page rendered using jQuery and an Active Model Serialization JSON backend. 
+- [x] Include an index page rendered using jQuery and an Active Model Serialization JSON backend.
+  - Used an ajax request to the trips#index action to pull all of a user's trips and render them using jQuery with Active Model Serialization
+
 - [ ] Include at least one has_many relationship in information rendered via JSON
 - [ ] Include at least one link that loads or updates a resource without reloading the page
 - [ ] Translate JSON responses into js model objects
