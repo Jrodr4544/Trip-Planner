@@ -9,12 +9,6 @@
       <h4>Trips:</h4>
       <a class="trips">Click Here</a>
       <div id="mo-trips"></div>
-      <!-- <% @trips.each do |trip| %> -->
-         <!-- <h4><%= link_to trip.title, trip_path(trip) %></h4> -->
-        <!-- <p><%= trip.description     %></p> -->
-
-        <!-- <%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: trip.id }, method: :delete, data: { confirm: "Are you sure?" } %> -->
-      <% end %>
     <% end %>
   </div>
 </div>
@@ -34,7 +28,7 @@
             // the variable below did not let me interpolate id so I had to manually do it
             var deleteButton = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
 
-            $('#mo-trips').append('<a href=/trips/'+data[index].id+'>'+data[index].title+'</a><br><li>'+data[index].description+'</li><br>'+deleteButton);
+            $('#mo-trips').append('<h4><a href=/trips/'+data[index].id+'>'+data[index].title+'</a></h4><li>'+data[index].description+'</li><br>'+deleteButton);
 
             // below I interpolate that id to the button action
             $('form:eq('+index+')').removeAttr('action');
