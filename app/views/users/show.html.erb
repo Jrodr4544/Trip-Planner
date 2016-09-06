@@ -6,8 +6,8 @@
       <p>Email: <%= current_user.email %></p>
       <br>
       <p><small>View a trip and add objectives!</small></p>
-      <h4>Trips:</h4>
-      <a class="trips">Click Here</a>
+      <a class="btn btn-lg btn-primary" id="trips" role="button">Trips:</a>
+      <a id="trip-objectives" role="button"></a>
       <div id="mo-trips"></div>
     <% end %>
   </div>
@@ -15,8 +15,12 @@
 
 <script type="text/javascript" charset='utf-8'>
   $(function() {
-    $(".trips").click(function() {
+    $("#trips").click(function() {
       var id = <%= current_user.id %>;
+      // populating button for trip objectives
+      $('#trip-objectives').attr('class', 'btn btn-lg btn-primary');
+      $('#trip-objectives').text('Trip Objectives:');
+      
       $.ajax({
         dataType: 'json',
         url: "/trips",
