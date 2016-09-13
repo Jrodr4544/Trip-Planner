@@ -82,6 +82,7 @@
       
     <% end %>
     </ul>
+    <a class="btn btn-primary" id="bam" role="button">click</a>
 </div>
 <%= render 'layouts/links' %>
 <!-- Creating ajax for jquery rendering on show page but might just render show on same index page -->
@@ -91,16 +92,29 @@
     var currentPath = window.location.pathname,
         url         = currentPath+'/objectives/new';             
     
+    var updateForm = function() {
+      debugger
+      if ($('div.header:eq(1)')[0]) {
+        $('div.header:eq(1)').hide();
+        $('.footer:eq(0)').hide();
+      }
+    };
+
     $("#new-objective").click(function() {
       $.get(url, function(data){
-        $("#new-objective").append(data);
-      })  
+        $("#new-objective").after(data);
+      })
     });
-  
+    // removing the header and footer that the form page loads
+    // using this click event because can't hide the header and footer from objectives/form on creation
+    $("#bam").click(function() {
+      updateForm();
+    })
+
+    // $("#objectives-div").on('load', 'div.header', function() {
+    //   updateForm();
+    // });
   });
 
 </script>
-
-
-
 
