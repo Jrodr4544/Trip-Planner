@@ -5,7 +5,7 @@
       <h4>Name: <%= current_user.name  %><h4>
       <p>Email: <%= current_user.email %></p>
       <br>
-      <p><small>View a trip and add objectives!</small></p>
+      <p><small>View a trip and its objectives!</small></p>
       <a class="btn btn-lg btn-primary" id="trips" role="button">Trips:</a>
       <a id="trip-objectives" role="button"></a>
       <div id="mo-trips"></div>
@@ -13,35 +13,68 @@
   </div>
 </div>
 
+
 <script type="text/javascript" charset='utf-8'>
   $(function() {
+
     $("#trips").click(function() {
       var id = <%= current_user.id %>;
-      // populating button for trip objectives
-      $('#trip-objectives').attr('class', 'btn btn-lg btn-primary');
-      $('#trip-objectives').text('Trip Objectives:');
-      
+
+      var showTrips = function(id, obj, button1, button2) {
+        var data            = obj,
+            objectiveButton = button1,
+            deleteButton    = button2;
+
+        $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteButton);
+      }
+
+      var addObjectives = function(element) {
+        var url = element.attr('data-url');
+
+        $.ajax({
+          dataType: 'json',
+          url: url,
+          method: 'GET',
+          success: function(data) {
+            $.each(data, function(index,key) {
+              // Inserting objectives before the delete button for the corresponding trip
+              $("<div><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a></div><li>"+data[index].notes+"</li><br>").insertBefore('form[action="'+url+'"]');
+            })
+          }
+        })
+      }
+
+      // getting index of trips
       $.ajax({
         dataType: 'json',
         url: "/trips",
         method: 'GET',
         success: function(data) {
           $.each(data, function(index,key) {
-
-            var id           = data[index].id;
+            var id              = data[index].id;
             // the variable below did not let me interpolate id so I had to manually do it
-            var deleteButton = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
+            var deleteButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
 
-            $('#mo-trips').append('<h4><a href=/trips/'+data[index].id+'>'+data[index].title+'</a></h4><li>'+data[index].description+'</li><br>'+deleteButton);
+            var objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>';
 
-            // below I interpolate that id to the button action
+            showTrips(id, data[index], objectiveButton, deleteButton); 
+            
+            // below I interpolate that id to the delete button action
             $('form:eq('+index+')').removeAttr('action');
             $('form:eq('+index+')').attr('action', '/trips/'+id);
 
           });
+          // delegated event handler so that when a specific element is selected an action is called
+          $("div#mo-trips").on("click", "span#trip-objectives", function() {
+            addObjectives($(this));
+          })
         }
+
       });
+
     })
+
+    
   });
 
 </script>
