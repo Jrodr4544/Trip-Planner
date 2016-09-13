@@ -2,7 +2,9 @@
 
 Specs:
 - [x] Use jQuery for implementing new requirements
-- [ ] Include a show page rendered using jQuery and an Active Model Serialization JSON backend. 
+- [x] Include a show page rendered using jQuery and an Active Model Serialization JSON backend.
+  - Used a nested ajax to render details from a trips#show action with a delegated event handler
+
 - [x] Include an index page rendered using jQuery and an Active Model Serialization JSON backend.
   - Used an ajax request to the trips#index action to pull all of a user's trips and render them using jQuery with Active Model Serialization
 
