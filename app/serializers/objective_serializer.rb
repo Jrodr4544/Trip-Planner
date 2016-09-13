@@ -1,3 +1,3 @@
 class ObjectiveSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title, :notes
 end
