@@ -54,7 +54,10 @@
 <% end %>  
 <br>
 <div class="well">
-  <div id="objectives-div"><h1 id="trip-objectives">Trip Objectives</h1></div>
+  <div id="objectives-div">
+    <h1 id="trip-objectives">Trip Objectives</h1>
+    <a class="btn btn-primary" id="new-objective" role="button">New Objective</a>
+  </div>
   <h1><%= @trip.title %></h1>
   
     <ul>
@@ -84,13 +87,18 @@
 <!-- Creating ajax for jquery rendering on show page but might just render show on same index page -->
 <script type="text/javascript">
   $(function() {
-    $("trip-objectives").click(function() {
-      $.ajax({
-        dataType: 'json',
-        url: "", 
-      })
+    // currentPath var gets the pathname for the current trip
+    var currentPath = window.location.pathname,
+        url         = currentPath+'/objectives/new';             
+    
+    $("#new-objective").click(function() {
+      $.get(url, function(data){
+        $("#new-objective").append(data);
+      })  
     });
+  
   });
+
 </script>
 
 
