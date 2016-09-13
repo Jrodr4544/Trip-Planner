@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   resources :objectives, :only => [:new, :update]
   post "/objectives" => "objectives#create", :as => :create_objective
+
 end
