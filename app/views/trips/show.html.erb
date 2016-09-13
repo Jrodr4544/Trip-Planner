@@ -54,6 +54,7 @@
 <% end %>  
 <br>
 <div class="well">
+  <div id="objectives-div"><h1 id="trip-objectives">Trip Objectives</h1></div>
   <h1><%= @trip.title %></h1>
   
     <ul>
@@ -80,6 +81,17 @@
     </ul>
 </div>
 <%= render 'layouts/links' %>
+<!-- Creating ajax for jquery rendering on show page but might just render show on same index page -->
+<script type="text/javascript">
+  $(function() {
+    $("trip-objectives").click(function() {
+      $.ajax({
+        dataType: 'json',
+        url: "", 
+      })
+    });
+  });
+</script>>
 
 
 
