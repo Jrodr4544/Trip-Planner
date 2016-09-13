@@ -2,7 +2,6 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def index
-    binding.pry
     if current_user
       @trips = current_user.trips 
       respond_to do |format|
@@ -17,8 +16,6 @@ class TripsController < ApplicationController
   end
 
   def show
-    # gon.googleMapsApi = "AIzaSyC6bIdRiDEVfRxawlb_b2-VUwhdrNy7ZZA"
-    # @key = gon.googleMapsApi
     @locations = []
     @sortedObjectives = []
     @states           = []
@@ -37,7 +34,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @trip, root: true}
+      format.json { render json: @sortedObjectives, root: true}
     end
   end
 
