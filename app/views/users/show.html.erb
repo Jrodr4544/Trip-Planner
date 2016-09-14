@@ -38,7 +38,8 @@
 
       var addObjectives = function(element) {
         var url = element.attr('data-url');
-        // debugger
+
+        // Resetting the div based on element clicked on. If it exists reset, otherwise add it.
         if ($('div[data-url="'+url+'"]').get()[0]){
           $('div[data-url="'+url+'"]').remove()
           $('span[data-url="'+url+'"]').after("<div data-url="+url+"></div>");
@@ -82,7 +83,7 @@
           });
           // delegated event handler so that when a specific element is selected an action is called
           $("div#mo-trips").on("click", "span#trip-objectives", function() {
-            debugger
+            // adding objectives for trip selected accordingly
             addObjectives($(this));
           })
         }
