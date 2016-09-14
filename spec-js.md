@@ -14,6 +14,7 @@ Specs:
 
 - [x] Include at least one link that loads or updates a resource without reloading the page
   - clicking new objective in the show page renders the objective#new form which creates new objectives
+  - the form which is loaded on trips#edit and trips#new actions, uses jquery to post the values and make changes
 
 - [x] Translate JSON responses into js model objects
   - converting JSON response into JS model objects via an ajax get request to the trips#state action
@@ -21,7 +22,7 @@ Specs:
 - [ ] At least one of the js model objects must have at least one method added by your code to the prototype
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message
