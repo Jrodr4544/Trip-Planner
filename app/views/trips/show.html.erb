@@ -104,7 +104,6 @@
 
     $("#new-objective").click(function() {
       var url = path+'/objectives/new';             
-  
       $.get(url, function(data){
         $("#new-objective").after(data);
       })
@@ -119,6 +118,15 @@
     // grab the details for this element to use jquery
       var state = $(this)[0].title;
       var url   = path+'/objectives/state/'+state;
+      
+      // testing if the element div#state exists
+      if ($("div#"+state).get()[0]) {
+        // reseting the div if it exists
+        $("div#"+state).remove();
+        $(this).after("<div id="+state+"></div>");
+      } else {
+        $(this).after("<div id="+state+"></div>");
+      }
 
       $.get(url, function(data){
         // using regex to grab everything before last back slash which should be a state
@@ -126,7 +134,8 @@
 
         $.each(data, function(index,key) {
         // Inserting objectives after objectives button based on location
-          $("h4[title="+location+"]").after("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
+          $("div#"+location+"").append("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
+          // $("h4[title="+location+"]").after("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
       
         })
       });
