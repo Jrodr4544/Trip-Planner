@@ -12,7 +12,7 @@ class LocationsController < ApplicationController
     @location = Location.create(location_params)
 
     if @location.save
-      redirect_to '/trips', notice: 'Location was successfully created.'
+      redirect_to '/', notice: 'Location was successfully created.'
     else
       render :new
     end
