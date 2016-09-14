@@ -1,4 +1,5 @@
 class ObjectivesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_trip, only: [:index, :show, :create, :edit, :update, :destroy]
 
   def index
@@ -22,7 +23,7 @@ class ObjectivesController < ApplicationController
     @objective = Objective.create(objective_params)
 
     if @objective.save
-      redirect_to user_path(current_user), notice: 'Objective was successfully created.'
+      flash.now[:notice] = 'Objective was successfully created.'
     else
       render :new
     end
