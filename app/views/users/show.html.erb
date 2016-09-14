@@ -38,12 +38,13 @@
 
       var addObjectives = function(element) {
         var url = element.attr('data-url');
-        debugger
-        var count = 0;
-        if (count > 0) {
-          $(this).empty();
+        // debugger
+        if ($('div[data-url="'+url+'"]').get()[0]){
+          $('div[data-url="'+url+'"]').remove()
+          $('span[data-url="'+url+'"]').after("<div data-url="+url+"></div>");
+        } else {
+          $('span[data-url="'+url+'"]').after("<div data-url="+url+"></div>");
         }
-        count++;
 
         $.ajax({
           dataType: 'json',
@@ -52,8 +53,7 @@
           success: function(data) {
             $.each(data, function(index,key) {
               // Inserting objectives before the delete button for the corresponding trip
-              $('span[data-url="'+url+'"]').after("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
-              // $("<div><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a></div><li>"+data[index].notes+"</li><br>").insertBefore('form[action="'+url+'"]');
+              $('div[data-url="'+url+'"]').append("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
             })
           }
         })
@@ -82,6 +82,7 @@
           });
           // delegated event handler so that when a specific element is selected an action is called
           $("div#mo-trips").on("click", "span#trip-objectives", function() {
+            debugger
             addObjectives($(this));
           })
         }
