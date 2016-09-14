@@ -95,6 +95,8 @@
       if ($('div.header:eq(1)')[0]) {
         $('div.header:eq(1)').hide();
         $('.footer:eq(0)').hide();
+        $("input[value='Submit']").hide();
+        $("div.actions").append("<div class='btn btn-primary'>Submit</div>");
       }
     };
 
@@ -126,7 +128,7 @@
       
         })
       });
-      
+
     });
 
   });
