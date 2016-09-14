@@ -15,20 +15,6 @@ class TripsController < ApplicationController
 
   end
 
-  def state
-    # this action is used to render JSON objects by state
-    @sortedObjectives = []
-    if current_user
-      @sortedObjectives = @trip.objectives.select {|objective| objective.location[:state] == params[:state]}
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @sortedObjectives, root: true}
-      end
-    else
-      redirect_to root_path
-    end
-  end
-
   def show
     @locations = []
     @sortedObjectives = []
@@ -49,6 +35,19 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @sortedObjectives, root: true}
+    end
+  end
+
+  def state
+    # this action is used to render JSON objects by state
+    # binding.pry
+    @sortedObjectives = []
+    if current_user
+      # binding.pry
+      @sortedObjectives = @trip.objectives.select {|objective| objective.location[:state] == params[:state]}
+        render json: @sortedObjectives, root: true
+    else
+      redirect_to root_path
     end
   end
 
