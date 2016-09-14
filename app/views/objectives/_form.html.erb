@@ -32,10 +32,6 @@
       // make sure that values is set properly, otherwise grab each individual value from the input fields. Maybe use the trip id field to send a post to /trips/:trip_id/objectives  
       var posting = $.post('/trips/'+trip_id+'/objectives', values);
 
-      posting.done(function(data) {
-        debugger
-        alert("Objective Created");
-      });
     });
   });
 </script>
