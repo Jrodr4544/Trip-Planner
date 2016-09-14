@@ -40,10 +40,8 @@ class TripsController < ApplicationController
 
   def state
     # this action is used to render JSON objects by state
-    # binding.pry
     @sortedObjectives = []
     if current_user
-      # binding.pry
       @sortedObjectives = @trip.objectives.select {|objective| objective.location[:state] == params[:state]}
         render json: @sortedObjectives, root: true
     else
