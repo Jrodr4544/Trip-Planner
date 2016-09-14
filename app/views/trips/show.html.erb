@@ -115,15 +115,20 @@
     // grab the details for this element to use jquery
       var state = $(this)[0].title;
       var url   = path+'/objectives/state/'+state;
-    
+
       $.get(url, function(data){
-        debugger
-      })
+        // using regex to grab everything before last back slash which should be a state
+        var location = $(this)[0].url.match(/[^/]+$/)[0];
+
+        $.each(data, function(index,key) {
+        // Inserting objectives after objectives button based on location
+          $("h4[title="+location+"]").after("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
+      
+        })
+      });
+      
     });
 
-    // $("#objectives-div").on('load', 'div.header', function() {
-    //   updateForm();
-    // });
   });
 
 </script>
