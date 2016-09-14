@@ -20,6 +20,14 @@
     $("#trips").click(function() {
       var id = <%= current_user.id %>;
 
+      if ($("div#mo-trips").get()[0]) {
+        // reseting the div if it exists
+        $("div#mo-trips").remove();
+        $(this).after("<div id=mo-trips></div>");
+      } else {
+        $(this).after("<div id=mo-trips></div>");
+      }
+
       var showTrips = function(id, obj, button1, button2) {
         var data            = obj,
             objectiveButton = button1,
@@ -30,6 +38,12 @@
 
       var addObjectives = function(element) {
         var url = element.attr('data-url');
+        debugger
+        var count = 0;
+        if (count > 0) {
+          $(this).empty();
+        }
+        count++;
 
         $.ajax({
           dataType: 'json',
@@ -38,7 +52,8 @@
           success: function(data) {
             $.each(data, function(index,key) {
               // Inserting objectives before the delete button for the corresponding trip
-              $("<div><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a></div><li>"+data[index].notes+"</li><br>").insertBefore('form[action="'+url+'"]');
+              $('span[data-url="'+url+'"]').after("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
+              // $("<div><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a></div><li>"+data[index].notes+"</li><br>").insertBefore('form[action="'+url+'"]');
             })
           }
         })
@@ -50,6 +65,7 @@
         url: "/trips",
         method: 'GET',
         success: function(data) {
+
           $.each(data, function(index,key) {
             var id              = data[index].id;
             // the variable below did not let me interpolate id so I had to manually do it
