@@ -66,7 +66,7 @@
       
       <% if objective.location %>
         <% if objective.location.state == @states[index] %>
-          <h4 id="#{objective.location.state}"><%= objective.location.state %>'s Objectives:</h4>
+          <h4 id="<%= index %>" class="btn btn-info" title="<%= objective.location.state %>" ><%= objective.location.state %>'s Objectives:</h4>
         <% end %>
           <!-- <li><h4><%= link_to objective.title, trip_objective_path(objective.trip, objective) %></h4></li>
           <li>City:    <%= objective.location.city    %></li>
@@ -89,11 +89,9 @@
 <script type="text/javascript">
   $(function() {
     // currentPath var gets the pathname for the current trip
-    var currentPath = window.location.pathname,
-        url         = currentPath+'/objectives/new';             
+    var path        = window.location.pathname;
     
     var updateForm = function() {
-      debugger
       if ($('div.header:eq(1)')[0]) {
         $('div.header:eq(1)').hide();
         $('.footer:eq(0)').hide();
@@ -101,6 +99,8 @@
     };
 
     $("#new-objective").click(function() {
+      var url = path+'/objectives/new';             
+  
       $.get(url, function(data){
         $("#new-objective").after(data);
       })
@@ -109,7 +109,17 @@
     // using this click event because can't hide the header and footer from objectives/form on creation
     $("#bam").click(function() {
       updateForm();
-    })
+    });
+
+    $("h4").click(function() {
+    // grab the details for this element to use jquery
+      var state = $(this)[0].title;
+      var url   = path+'/objectives/state/'+state;
+    
+      $.get(url, function(data){
+        debugger
+      })
+    });
 
     // $("#objectives-div").on('load', 'div.header', function() {
     //   updateForm();
