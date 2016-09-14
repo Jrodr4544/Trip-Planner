@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   resources :objectives, :only => [:new, :update]
   post "/objectives" => "objectives#create", :as => :create_objective
 
+  get '/trips/:id/objectives/state/:state', to: 'trips#state'
+
 end
