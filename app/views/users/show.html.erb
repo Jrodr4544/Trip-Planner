@@ -17,26 +17,17 @@
 <script type="text/javascript" charset='utf-8'>
   $(function() {
 
-    $("#trips").click(function() {
-      var id = <%= current_user.id %>;
+    var showTrips = function(id, obj) {
+      var data            = obj,
+          objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
+          // objectiveButton = button1,
+          // the variable below did not let me interpolate id so I had to manually do it
+          deleteButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
 
-      if ($("div#mo-trips").get()[0]) {
-        // reseting the div if it exists
-        $("div#mo-trips").remove();
-        $(this).after("<div id=mo-trips></div>");
-      } else {
-        $(this).after("<div id=mo-trips></div>");
-      }
+      $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteButton);
+    }
 
-      var showTrips = function(id, obj, button1, button2) {
-        var data            = obj,
-            objectiveButton = button1,
-            deleteButton    = button2;
-
-        $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteButton);
-      }
-
-      var addObjectives = function(element) {
+    var addObjectives = function(element) {
         var url = element.attr('data-url');
 
         // Resetting the div based on element clicked on. If it exists reset, otherwise add it.
@@ -60,6 +51,17 @@
         })
       }
 
+    $("#trips").click(function() {
+      var id = <%= current_user.id %>;
+
+      if ($("div#mo-trips").get()[0]) {
+        // reseting the div if it exists
+        $("div#mo-trips").remove();
+        $(this).after("<div id=mo-trips></div>");
+      } else {
+        $(this).after("<div id=mo-trips></div>");
+      }
+
       // getting index of trips
       $.ajax({
         dataType: 'json',
@@ -68,15 +70,11 @@
         success: function(data) {
 
           $.each(data, function(index,key) {
-            var id              = data[index].id;
-            // the variable below did not let me interpolate id so I had to manually do it
-            var deleteButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
+            var id = data[index].id;
 
-            var objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>';
-
-            showTrips(id, data[index], objectiveButton, deleteButton); 
+            showTrips(id, data[index]); 
             
-            // below I interpolate that id to the delete button action
+            // below I interpolate the current object's id to the delete button action
             $('form:eq('+index+')').removeAttr('action');
             $('form:eq('+index+')').attr('action', '/trips/'+id);
 
