@@ -31,7 +31,6 @@
     var showTrips = function(id, obj) {
       var data            = obj,
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
-          // objectiveButton = button1,
           // the variable below did not let me interpolate id so I had to manually do it
           deleteButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
 
