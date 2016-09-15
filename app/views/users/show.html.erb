@@ -17,6 +17,17 @@
 <script type="text/javascript" charset='utf-8'>
   $(function() {
 
+    var resetElement = function(element1, element2, window) {
+      if ($(element1).get()[0]) {
+        // reseting the div if it exists
+        $(element1).remove();
+        window.after(element2);
+      } else {
+        // creating div if it doesn't exist
+        window.after(element2);
+      }
+    }  
+
     var showTrips = function(id, obj) {
       var data            = obj,
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
@@ -28,39 +39,28 @@
     }
 
     var addObjectives = function(element) {
-        var url = element.attr('data-url');
+      var url = element.attr('data-url');
 
-        // Resetting the div based on element clicked on. If it exists reset, otherwise add it.
-        if ($('div[data-url="'+url+'"]').get()[0]){
-          $('div[data-url="'+url+'"]').remove()
-          $('span[data-url="'+url+'"]').after("<div data-url="+url+"></div>");
-        } else {
-          $('span[data-url="'+url+'"]').after("<div data-url="+url+"></div>");
+      // Resetting the div based on element clicked on. If it exists reset, otherwise add it.
+      resetElement('div[data-url="'+url+'"]', "<div data-url="+url+"></div>", $('span[data-url="'+url+'"]'));
+
+      $.ajax({
+        dataType: 'json',
+        url: url,
+        method: 'GET',
+        success: function(data) {
+          $.each(data, function(index,key) {
+            // Inserting objectives before the delete button for the corresponding trip
+            $('div[data-url="'+url+'"]').append("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
+          })
         }
-
-        $.ajax({
-          dataType: 'json',
-          url: url,
-          method: 'GET',
-          success: function(data) {
-            $.each(data, function(index,key) {
-              // Inserting objectives before the delete button for the corresponding trip
-              $('div[data-url="'+url+'"]').append("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
-            })
-          }
-        })
-      }
+      })
+    }
 
     $("#trips").click(function() {
       var id = <%= current_user.id %>;
 
-      if ($("div#mo-trips").get()[0]) {
-        // reseting the div if it exists
-        $("div#mo-trips").remove();
-        $(this).after("<div id=mo-trips></div>");
-      } else {
-        $(this).after("<div id=mo-trips></div>");
-      }
+      resetElement("div#mo-trips", "<div id=mo-trips></div>", $(this));
 
       // getting index of trips
       $.ajax({
@@ -85,11 +85,8 @@
             addObjectives($(this));
           })
         }
-
-      });
-
+      });// ajax ends
     })
-
     
   });
 
