@@ -38,54 +38,59 @@
       $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteButton);
     }
 
+    var ajaxRequest = function(url, callback) {
+      $.ajax({
+        dataType: 'json',
+        url: url,
+        method: 'GET',
+        success: callback
+      })
+    }
+
     var addObjectives = function(element) {
       var url = element.attr('data-url');
 
       // Resetting the div based on element clicked on. If it exists reset, otherwise add it.
       resetElement('div[data-url="'+url+'"]', "<div data-url="+url+"></div>", $('span[data-url="'+url+'"]'));
 
-      $.ajax({
-        dataType: 'json',
-        url: url,
-        method: 'GET',
-        success: function(data) {
+      var objectives = function(data) {
           $.each(data, function(index,key) {
             // Inserting objectives before the delete button for the corresponding trip
             $('div[data-url="'+url+'"]').append("<br><a href="+url+"/objectives/"+data[index].id+">"+data[index].title+"</a><li>"+data[index].notes+"</li>")
           })
         }
-      })
+
+      // getting and adding objectives
+      ajaxRequest(url, objectives);
+
     }
 
-    $("#trips").click(function() {
-      var id = <%= current_user.id %>;
 
+    $("#trips").click(function() {
+      var id  = <%= current_user.id %>;
+      var url = "/trips";
       resetElement("div#mo-trips", "<div id=mo-trips></div>", $(this));
 
+      var tripsIndex = function(data) {
+        $.each(data, function(index,key) {
+          var id = data[index].id;
+
+          showTrips(id, data[index]); 
+          
+          // below I interpolate the current object's id to the delete button action
+          $('form:eq('+index+')').removeAttr('action');
+          $('form:eq('+index+')').attr('action', '/trips/'+id);
+
+        });
+        // delegated event handler so that when a specific element is selected an action is called
+        $("div#mo-trips").on("click", "span#trip-objectives", function() {
+          // adding objectives for trip selected accordingly
+          addObjectives($(this));
+        })
+      }
+      
       // getting index of trips
-      $.ajax({
-        dataType: 'json',
-        url: "/trips",
-        method: 'GET',
-        success: function(data) {
-
-          $.each(data, function(index,key) {
-            var id = data[index].id;
-
-            showTrips(id, data[index]); 
-            
-            // below I interpolate the current object's id to the delete button action
-            $('form:eq('+index+')').removeAttr('action');
-            $('form:eq('+index+')').attr('action', '/trips/'+id);
-
-          });
-          // delegated event handler so that when a specific element is selected an action is called
-          $("div#mo-trips").on("click", "span#trip-objectives", function() {
-            // adding objectives for trip selected accordingly
-            addObjectives($(this));
-          })
-        }
-      });// ajax ends
+      ajaxRequest(url, tripsIndex);
     })
     
   });
