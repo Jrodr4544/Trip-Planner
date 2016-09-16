@@ -34,6 +34,8 @@
           // the variable below did not let me interpolate id so I had to manually do it
           deleteButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
 
+          // need to create js-model-object here and then call its properties like objective.id, objective.title, objective.description
+
       $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteButton);
     }
 
@@ -64,7 +66,6 @@
 
     }
 
-
     $("#trips").click(function() {
       var id  = <%= current_user.id %>;
       var url = "/trips";
@@ -73,7 +74,7 @@
       var tripsIndex = function(data) {
         $.each(data, function(index,key) {
           var id = data[index].id;
-
+          // adds trips to page and also adds delete buttons but without ids
           showTrips(id, data[index]); 
           
           // below I interpolate the current object's id to the delete button action
