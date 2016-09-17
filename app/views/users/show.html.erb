@@ -33,7 +33,7 @@
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
           // the variable below did not let me interpolate id so I had to manually do it
           deleteTripButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
-
+          
           // need to create js-model-object here and then call its properties like objective.id, objective.title, objective.description
 
       $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteTripButton);
