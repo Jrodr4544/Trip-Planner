@@ -82,39 +82,26 @@
       
     <% end %>
     </ul>
-    <a class="btn btn-primary" id="bam" role="button">click</a>
 </div>
 <%= render 'layouts/links' %>
-<!-- Creating ajax for jquery rendering on show page but might just render show on same index page -->
+
 <script type="text/javascript">
 
   $(function() {
     // currentPath var gets the pathname for the current trip
     var path        = window.location.pathname;
-    
-    var updateForm = function() {
-      if ($('div.header:eq(1)')[0]) {
-        $('div.header:eq(1)').hide();
-        $('.footer:eq(0)').hide();
-      }
-    };
 
     $("#new-objective").click(function() {
       var url = path+'/objectives/new',
        parser = new DOMParser();
 
       $.get(url, function(data){
+        // parsing data(page at /objectives/new) from text to html
         var htmlDoc = parser.parseFromString(data, "text/html"),
             form    = htmlDoc.body.children[2].children[10];
-        debugger
-          
+        // adding the parsed out form
         $("#new-objective").after(form);
       })
-    });
-    // removing the header and footer that the form page loads
-    // using this click event because can't hide the header and footer from objectives/form on creation
-    $("#bam").click(function() {
-      updateForm();
     });
 
     $("h4").click(function() {
@@ -138,8 +125,6 @@
         $.each(data, function(index,key) {
         // Inserting objectives after objectives button based on location
           $("div#"+location+"").append("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
-          // $("h4[title="+location+"]").after("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
-      
         })
       });
 
