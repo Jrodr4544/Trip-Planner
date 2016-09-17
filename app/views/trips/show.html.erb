@@ -100,9 +100,15 @@
     };
 
     $("#new-objective").click(function() {
-      var url = path+'/objectives/new';             
+      var url = path+'/objectives/new',
+       parser = new DOMParser();
+
       $.get(url, function(data){
-        $("#new-objective").after(data);
+        var htmlDoc = parser.parseFromString(data, "text/html"),
+            form    = htmlDoc.body.children[2].children[10];
+        debugger
+          
+        $("#new-objective").after(form);
       })
     });
     // removing the header and footer that the form page loads
