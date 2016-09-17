@@ -13,28 +13,9 @@
   
   <%= render :partial => 'form_elements', :locals => { :f => f} %>
   
-  <div id='jquery-submit'>
+  <div class='objectives new' id='jquery-submit'>
     <%= f.submit "Submit", :class => 'btn btn-primary'%>
   </div>
   <br>
 
 <% end %>
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-
-    $('form').submit(function(event) {
-      //prevent form from submitting the default way
-      event.preventDefault();
- 
-      var values = $(this).serialize();
-      var trip_id = $('select#objective_trip_id').val();
-
-      // make sure that values is set properly, otherwise grab each individual value from the input fields. Maybe use the trip id field to send a post to /trips/:trip_id/objectives  
-      var posting = $.post('/trips/'+trip_id+'/objectives', values);
-      posting.done(function(data){
-        debugger
-      })
-    });
-  });
-</script>
