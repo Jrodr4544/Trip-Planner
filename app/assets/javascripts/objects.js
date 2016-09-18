@@ -9,13 +9,17 @@ function Objective(id, title, notes) {
   this.title  = title;
   this.notes  = notes;
 }
+
+Objective.prototype.alertMe = function() {
+  alert("Objective: "+this.title+"; "+this.notes+", created!");
+}
+
 // The trips show does not like the event handler below for some reason
 $(function () {
 
   $('form#new_objective').submit(function(event) {
   //prevent form from submitting the default way
   event.preventDefault();
-  debugger
   var values  = $(this).serialize();
   var trip_id = $('select#objective_trip_id').val();
   var url     = '/trips/'+trip_id+'/objectives';
@@ -28,16 +32,13 @@ $(function () {
       data: values
     }).done( function(data) {
       var objective = new Objective(data["id"], data["title"], data["notes"]);
-      // myGists(e.owner.login, token);
+      objective.alertMe();
     });
   }
-  posting(url, values);
-  // posting.done(function(data){
-  //   debugger
-  //   
-  //   alert(data);
-  // })
 
+  posting(url, values);
+  debugger
+  $(this).reset();
  });
 });
 
