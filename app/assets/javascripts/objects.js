@@ -37,7 +37,7 @@ $(function () {
   }
 
   posting(url, values);
-  debugger
+  // resetting form
   $(this).reset();
  });
 });
