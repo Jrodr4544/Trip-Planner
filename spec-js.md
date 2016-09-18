@@ -19,7 +19,8 @@ Specs:
 - [x] Translate JSON responses into js model objects
   - converting JSON response into JS model objects via an ajax post request to the objectives#create action
 
-- [ ] At least one of the js model objects must have at least one method added by your code to the prototype
+- [x] At least one of the js model objects must have at least one method added by your code to the prototype
+ - added a function alertMe to the Objective JS model object's prototype. It alert's itself upon creation
 
 Confirm
 - [x] You have a large number of small Git commits
