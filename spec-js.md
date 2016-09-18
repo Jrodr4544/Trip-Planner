@@ -17,7 +17,7 @@ Specs:
   - the form which is loaded on trips#edit and trips#new actions, uses jquery to post the values and make changes
 
 - [x] Translate JSON responses into js model objects
-  - converting JSON response into JS model objects via an ajax get request to the trips#state action
+  - converting JSON response into JS model objects via an ajax post request to the objectives#create action
 
 - [ ] At least one of the js model objects must have at least one method added by your code to the prototype
 
