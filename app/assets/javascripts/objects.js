@@ -51,6 +51,10 @@ var resetElement = function(element1, element2, window) {
 }  
 
 $(function () {
+  // $('form#new_objective').submit(function(event) {
+  //   // thought of adding form event listener here, but it did not work either
+  //   debugger
+  //  });
   $("#new-objective").click(function() {
       debugger
       var path  = window.location.pathname,
@@ -64,7 +68,14 @@ $(function () {
             form    = htmlDoc.body.children[2].children[11];
         // adding the parsed out form
         $("#new-objective").after(form);
+        var domForm =  document.getElementById("new_objective");
+        debugger
+
+        // domForm.addEventListener("Submit", function(e) {
+        // thought of adding event listener upon form creation but did not work
+        // })
       })
+      
     });
 })
 
