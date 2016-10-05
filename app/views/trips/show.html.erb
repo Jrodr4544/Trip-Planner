@@ -84,25 +84,40 @@
     </ul>
 </div>
 <%= render 'layouts/links' %>
-
 <script type="text/javascript">
 
   $(function() {
     // currentPath var gets the pathname for the current trip
     var path        = window.location.pathname;
-
-    $("#new-objective").click(function() {
+    $(document).ready(function() {
+       debugger
       var url = path+'/objectives/new',
        parser = new DOMParser();
 
       $.get(url, function(data){
         // parsing data(page at /objectives/new) from text to html
+        debugger
         var htmlDoc = parser.parseFromString(data, "text/html"),
-            form    = htmlDoc.body.children[2].children[10];
+            form    = htmlDoc.body.children[2].children[11];
         // adding the parsed out form
         $("#new-objective").after(form);
       })
-    });
+    })
+
+    // $("#new-objective").click(function() {
+    //   debugger
+    //   var url = path+'/objectives/new',
+    //    parser = new DOMParser();
+
+    //   $.get(url, function(data){
+    //     // parsing data(page at /objectives/new) from text to html
+    //     debugger
+    //     var htmlDoc = parser.parseFromString(data, "text/html"),
+    //         form    = htmlDoc.body.children[2].children[11];
+    //     // adding the parsed out form
+    //     $("#new-objective").after(form);
+    //   })
+    // });
 
     $("h4").click(function() {
     // grab the details for this element to use jquery
@@ -119,12 +134,13 @@
       }
 
       $.get(url, function(data){
-        // using regex to grab everything before last back slash which should be a state
+        // using regex to grab everything before last back slash in url which should be a state
         var location = $(this)[0].url.match(/[^/]+$/)[0];
-
+        $("div#"+location+"").append("<table id="+location+"></table>");
+        
         $.each(data, function(index,key) {
         // Inserting objectives after objectives button based on location
-          $("div#"+location+"").append("<li>To do: "+data[index].title+"</li><li>Notes: "+data[index].notes+"</li><br>");
+          $("table#"+location+"").append("<tr><td> To do: "+data[index].title+"</td><td><td><td>Notes: "+data[index].notes+"</td></tr>");
         })
       });
 
