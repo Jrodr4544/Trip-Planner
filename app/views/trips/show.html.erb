@@ -89,35 +89,6 @@
   $(function() {
     // currentPath var gets the pathname for the current trip
     var path        = window.location.pathname;
-    $(document).ready(function() {
-       debugger
-      var url = path+'/objectives/new',
-       parser = new DOMParser();
-
-      $.get(url, function(data){
-        // parsing data(page at /objectives/new) from text to html
-        debugger
-        var htmlDoc = parser.parseFromString(data, "text/html"),
-            form    = htmlDoc.body.children[2].children[11];
-        // adding the parsed out form
-        $("#new-objective").after(form);
-      })
-    })
-
-    // $("#new-objective").click(function() {
-    //   debugger
-    //   var url = path+'/objectives/new',
-    //    parser = new DOMParser();
-
-    //   $.get(url, function(data){
-    //     // parsing data(page at /objectives/new) from text to html
-    //     debugger
-    //     var htmlDoc = parser.parseFromString(data, "text/html"),
-    //         form    = htmlDoc.body.children[2].children[11];
-    //     // adding the parsed out form
-    //     $("#new-objective").after(form);
-    //   })
-    // });
 
     $("h4").click(function() {
     // grab the details for this element to use jquery
