@@ -18,14 +18,10 @@
   $(function() {
 
     var resetElement = function(element1, element2, window) {
-      if ($(element1).get()[0]) {
-        // reseting the div if it exists
+        // removing the element1 if it exists to avoid adding duplicates
         $(element1).remove();
+        // adding element2 to the current window
         window.after(element2);
-      } else {
-        // creating div if it doesn't exist
-        window.after(element2);
-      }
     }  
 
     var showTrips = function(id, obj) {
@@ -74,7 +70,7 @@
           // adds trips to page and also adds delete buttons but without ids
           showTrips(id, data[index]); 
         });
-        
+
         // delegated event handler so that when a specific element is selected an action is called
         $("div#mo-trips").on("click", "span#trip-objectives", function() {
           // adding objectives for trip selected accordingly
