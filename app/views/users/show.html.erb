@@ -17,13 +17,6 @@
 <script type="text/javascript" charset='utf-8'>
   $(function() {
 
-    var resetElement = function(element1, element2, window) {
-        // removing the element1 if it exists to avoid adding duplicates
-        $(element1).remove();
-        // adding element2 to the current window
-        window.after(element2);
-    }  
-
     var showTrips = function(id, obj) {
       var data            = obj,
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
