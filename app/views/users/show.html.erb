@@ -73,12 +73,8 @@
           var id = data[index].id;
           // adds trips to page and also adds delete buttons but without ids
           showTrips(id, data[index]); 
-          
-          // below I interpolate the current trip's id to the delete button action
-          // $('form:eq('+index+')').removeAttr('action');
-          // $('form:eq('+index+')').attr('action', '/trips/'+id);
-
         });
+        
         // delegated event handler so that when a specific element is selected an action is called
         $("div#mo-trips").on("click", "span#trip-objectives", function() {
           // adding objectives for trip selected accordingly
