@@ -27,7 +27,9 @@ var post = function(values) {
       var objective = new Objective(data["id"], data["title"], data["notes"]);
       $('#objective').append('<li>'+objective.title+'</li><li>'+objective.notes+'</li>');
       objective.alertMe();
-      // $(this).reset();
+      // resetting form fields and submit button
+      $("input[type=submit]").removeAttr("disabled");
+      document.getElementById("new_objective").reset();
     });
   }
   posting(url, values);
