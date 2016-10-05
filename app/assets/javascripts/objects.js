@@ -43,3 +43,10 @@ $(function () {
    });
 });
 
+var resetElement = function(element1, element2, window) {
+    // removing the element1 if it exists to avoid adding duplicates
+    $(element1).remove();
+    // adding element2 to the current window
+    window.after(element2);
+}  
+
