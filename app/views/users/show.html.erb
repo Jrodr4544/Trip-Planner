@@ -31,11 +31,9 @@
     var showTrips = function(id, obj) {
       var data            = obj,
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
-          // the variable below did not let me interpolate id so I had to manually do it
-          deleteTripButton    = '<%= button_to "Delete Trip", { controller: :trips ,action: "destroy", id: '' }, method: :delete, data: { confirm: "Are you sure?" } %>';
+          // variable below is a delete form for the current trip
+          deleteTripButton    = '<form class="button_to" method="post" action="/trips/'+id+'"><input type="hidden" name="_method" value="delete"><input data-confirm="Are you sure?" type="submit" value="Delete Trip"><input type="hidden" name="authenticity_token" value="FfWqol5ahhhu7d8j8MgzrmjajPRoUdRqLYm8PGIUoSfwOgqOSGQ/kz9rpozZvv4ht0gndB8Y1DVGu4Svn3nnzQ=="></form>';
           
-          // need to create js-model-object here and then call its properties like objective.id, objective.title, objective.description
-
       $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteTripButton);
     }
 
@@ -77,8 +75,8 @@
           showTrips(id, data[index]); 
           
           // below I interpolate the current trip's id to the delete button action
-          $('form:eq('+index+')').removeAttr('action');
-          $('form:eq('+index+')').attr('action', '/trips/'+id);
+          // $('form:eq('+index+')').removeAttr('action');
+          // $('form:eq('+index+')').attr('action', '/trips/'+id);
 
         });
         // delegated event handler so that when a specific element is selected an action is called
