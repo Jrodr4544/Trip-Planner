@@ -1,5 +1,5 @@
 # Trip-Planner
-![Trip-Planner Logo](/assets/images/my_logo.png)
+![Trip-Planner Logo](http://example.com/images/my_logo.png)
 Format: ![Alt Text](url)
 
 ## Plan your trips
