@@ -1,6 +1,5 @@
 # Trip-Planner
 ![Trip-Planner Logo](https://github.com/Jrodr4544/Trip-Planner/blob/master/app/assets/images/my_logo.png)
-Format: ![Alt Text](url)
 
 ## Plan your trips
 This Rails project was created for my Rails assessment at FlatIron's [Learn.co](https://learn.co). It allows users to create a profile or use facebook credentials to log in. Once logged in, a user can create a Trip to plan objectives for and these objectives accept locations and display them on a map.
