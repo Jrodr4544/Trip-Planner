@@ -21,7 +21,7 @@
       var data            = obj,
           objectiveButton = '<span class="btn btn-sm btn-primary" id="trip-objectives" role="button" data-url="/trips/'+id+'">Objectives</span>',
           // variable below is a delete form for the current trip
-          deleteTripButton    = '<form class="button_to" method="post" action="/trips/'+id+'"><input type="hidden" name="_method" value="delete"><input data-confirm="Are you sure?" type="submit" value="Delete Trip"><input type="hidden" name="authenticity_token" value="FfWqol5ahhhu7d8j8MgzrmjajPRoUdRqLYm8PGIUoSfwOgqOSGQ/kz9rpozZvv4ht0gndB8Y1DVGu4Svn3nnzQ=="></form>';
+          deleteTripButton    = '<form class="button_to" method="post" action="/trips/'+id+'"><input type="hidden" name="_method" value="delete"><input data-confirm="Are you sure?" type="submit" value="Delete Trip"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"></form>';
           
       $('#mo-trips').append('<br><a class="btn btn-info" href=/trips/'+id+'>'+data.title+'</a>'+'  '+data.description+'<br><br>'+objectiveButton+'<br><br>'+deleteTripButton);
     }
