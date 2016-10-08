@@ -15,8 +15,10 @@ Objective.prototype.alertMe = function() {
 }
 
 var post = function(values) {
+  debugger
   var trip_id = $('select#objective_trip_id').val();
   var url     = '/trips/'+trip_id+'/objectives';
+
   var posting = function(url, values){
     $.ajax({
       url: url,
@@ -53,28 +55,39 @@ var resetElement = function(element1, element2, window) {
     window.after(element2);
 }  
 
+var bool  = true;
+
 $(function () {
 
   $("#new-objective").click(function() {
-      var path  = window.location.pathname,
-          url   = path+'/objectives/new', 
-       parser   = new DOMParser();
+      var trip_id             = window.location.pathname.match(/[^/]+$/)[0];
+      var objectiveFields     = '<div class="field"><label for="objective_title">Title</label><br><input autofocus="autofocus" type="text" name="objective[title]" id="objective_title"></div><div class="field"><label for="objective_notes">Notes</label><br><input type="text" name="objective[notes]" id="objective_notes"></div>'
+      var tripsDropDown       = '<div><select name="objective[trip_id]" id="objective_trip_id"><option value="'+trip_id+'">'+trip_id+'</option></select></div>'
+      var locationsDropDown   = '<div><select name="objective[location_id]" id="objective_location_id"><option value="">Please Select</option></select></div>'
+      var submit              = '<div class="objectives new" id="jquery-submit"><input type="submit" name="commit" value="Submit" class="btn btn-primary"></div>';
+      var form                = '<form class="new_objective" id="new_objective" action="/objectives" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">'+tripsDropDown+'</br>'+objectiveFields+'</br>'+locationsDropDown+'</br>'+submit+'</form>';
+      var domForm             = document.getElementById("new_objective");
 
-      $.get(url, function(data){
-        // parsing data(page at /objectives/new) from text to html
-        var htmlDoc = parser.parseFromString(data, "text/html"),
-            form    = htmlDoc.body.children[2].children[11];
-        // adding the parsed out form
+      // If the form doesn't exist, populate it.
+      if (domForm == null) {
         $("#new-objective").after(form);
-
-        // getting new form from dom
-        var domForm = document.getElementById("new_objective");
-
-        domForm.addEventListener("submit", function(e) {
-          e.preventDefault();
-          var values  = $(this).serialize();
-          post(values);
+      
+      // Populating list of Locations for drop down
+        $.get('/locations.json',function(data){
+          $.each(data, function(index,key) {
+            $('select#objective_location_id').append('<option value='+data[index].location.id+'>'+data[index].location.city+'</option>');
+          })
         })
+      } else {
+        bool ? $("#new_objective").hide() : $("#new_objective").show();
+        bool  = !bool;
+      }
+      
+      document.getElementById("new_objective").addEventListener("submit", function(e) {
+        debugger
+        e.preventDefault();
+        var values  = $(this).serialize();
+        post(values);
       })
 
     });
