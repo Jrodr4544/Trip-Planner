@@ -59,10 +59,10 @@
     <div id="objective"></div>
     <a class="btn btn-primary" id="new-objective" role="button">New Objective</a>
   </div>
-  <h1><%= @trip.title %></h1>
+  <h1><%= @trip.try(:title) %></h1>
   
     <ul>
-    <% @sortedObjectives.each_with_index do |objective, index| %>
+    <% @sortedObjectives.try(:each_with_index) do |objective, index| %>
       <!-- duplicate states hav nil set, so when each state gets compared to each objective's location state it will display the state which has already already been sorted and not the nil state --> 
       
       <% if objective.location %>
