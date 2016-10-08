@@ -3,7 +3,7 @@
         <p class="lead">Plan your trips at ease. That's all we need. Just plan and breathe..</p>
 
         <div class="well">
-          <p><%= Location.city_with_most_trips %>, is the most popular city!</p>
+          <p><%= Location.try(:city_with_most_trips) %>, is the most popular city!</p>
           <p>Plan a trip now!</p>
         </div>
         <% if !user_signed_in? %>
