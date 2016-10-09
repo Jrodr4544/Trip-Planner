@@ -12,7 +12,6 @@ class TripsController < ApplicationController
     else
       redirect_to root_path
     end
-
   end
 
   def show
@@ -56,7 +55,8 @@ class TripsController < ApplicationController
 
   def create
     @trip      = current_user.trips.create(title: trip_params["title"], description: trip_params["description"])
-    @trip.objectives_attributes = trip_params["objectives_attributes"]    
+    @trip.objectives_attributes = trip_params["objectives_attributes"] 
+       
     if @trip.save
       redirect_to '/trips', notice: 'Trip was successfully created.'
     else
