@@ -69,22 +69,15 @@
         <% if objective.location.state == @states[index] %>
           <h4 id="<%= index %>" class="btn btn-info" title="<%= objective.location.state %>" ><%= objective.location.state %>'s Objectives:</h4>
         <% end %>
-          <!-- <li><h4><%= link_to objective.title, trip_objective_path(objective.trip, objective) %></h4></li>
-          <li>City:    <%= objective.location.city    %></li>
-          <li>State:   <%= objective.location.state   %></li>
-          <li>Country: <%= objective.location.country %></li>
-          <li>Notes:   <%= objective.notes            %></li>
-          <li><%= link_to "Edit this objective", edit_trip_objective_path(@trip, objective) %></li>
-          <%= button_to "Delete Objective", trip_objective_path(@trip, objective), method: :delete, data: { confirm: "Are you sure?" } %>
-      <br> -->
       <% else %>
         <p><small>No location. Please edit this objective and select a location or add one below!</small></p>
       <% end %>
-      
     <% end %>
     </ul>
 </div>
+
 <%= render 'layouts/links' %>
+
 <script type="text/javascript">
 
   $(function() {
