@@ -7,7 +7,7 @@ accepts_nested_attributes_for :objectives
 
   def objectives_attributes=(objectives_attributes)
     # raise objectives_attributes.inspect
-    objectives_attributes.values.each do |objective_attribute|
+    objectives_attributes.try(:values).try(:each) do |objective_attribute|
       objective = Objective.find_or_create_by(objective_attribute)
       self.objectives << objective
     end
