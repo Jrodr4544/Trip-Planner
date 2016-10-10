@@ -32,6 +32,9 @@ var post = function(values) {
       // resetting form fields and submit button
       $("input[type=submit]").removeAttr("disabled");
       document.getElementById("new_objective").reset();
+    }).error( function(data) {
+      debugger
+      alert("Objective: "+this.title+"; "+this.notes+", failed");
     });
   }
   posting(url, values);
