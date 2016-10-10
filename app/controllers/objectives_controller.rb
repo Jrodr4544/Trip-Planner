@@ -21,12 +21,11 @@ class ObjectivesController < ApplicationController
 
   def create
     @objective = Objective.create(objective_params)
-
     if @objective.save
       flash.now[:notice] = 'Objective was successfully created.'
       render json: @objective, status: 201, root: true
     else
-      render :new
+      render json: @objective, status: 404
     end
   end
 
