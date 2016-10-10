@@ -21,11 +21,14 @@
     <%= f.text_field :description, autofocus: true %>
   </div>
   <br>
+  <% if (@trip.objectives.blank?) %>
+
   <label>New Objective:</label>
       <%= f.fields_for :objectives do |ff| %>
+      <% binding.pry %>
         <%= render :partial => 'objectives/form_elements', :locals => { :f => ff} %>
       <% end %>
-
+  <% end %>
   <br>
   <div class="actions">
     <%= f.submit "Submit" %>
